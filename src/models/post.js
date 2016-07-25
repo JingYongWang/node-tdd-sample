@@ -4,6 +4,8 @@ module.exports = (sequelize, DataTypes) => {
   var Post = sequelize.define('Post', {
     title: DataTypes.STRING,
     desc: DataTypes.STRING,
+    //add
+    price: DataTypes.INTEGER,
   }, {
     classMethods: {
       associate: (models) => {

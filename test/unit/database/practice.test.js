@@ -41,12 +41,14 @@ describe('practice', () => {
         desc: 'BBB',
         price: 100,
       };
-
-      let result;
+      //add
+      let result = await models.Post.create(input);
 
       result.title.should.be.eq('AAA');
       result.desc.should.be.eq('BBB');
       result.price.should.be.eq(100);
+
+
       done();
     } catch (e) {
       done(e);
@@ -73,8 +75,8 @@ describe('practice', () => {
 
     it('使用 sequelize 尋找 targetPost ', async (done) => {
       try {
-
-        let findTarget;
+        //add
+        let findTarget = await models.Post.findById(targetPost.id);
 
         findTarget.id.should.be.eq(targetPost.id);
         done();
@@ -90,9 +92,13 @@ describe('practice', () => {
           desc: '456',
           price: 999,
         }
+        //add
+        let findTarget = await models.Post.findById(targetPost.id);
+        findTarget.title = input.title
+        findTarget.desc = input.desc
+        findTarget.price = input.price
+        let result =  await findTarget.save();
 
-        let findTarget;
-        let result;
 
         result.title.should.be.eq(input.title);
         result.desc.should.be.eq(input.desc);
@@ -105,8 +111,11 @@ describe('practice', () => {
 
     it('使用 sequelize 刪除 targetPost', async (done) => {
       try {
+        //add
+        let findTarget = await models.Post.findById(targetPost.id);
+        await findTarget.destroy();
 
-        let findTarget;
+
 
         let check = await models.Post.findAll();
         (check.length === 0).should.be.true;
