@@ -2,7 +2,7 @@
 
 
 import FacebookHelper from '../../../src/facebook/helper.js'
-import task_initModel form '../../../src/models/friend.js'
+import task1_initModel from '../../../src/models/friend.js'
 
 describe('facebook-helper', () => {
   let facebookHelper = null;
@@ -17,7 +17,7 @@ describe('facebook-helper', () => {
     done();
   });
   //把從 facebook 取得的 friends list 存入 sequelize 之 friend model (create)
-  it("get frineds list and save in database", async (done) => {
+  it.only("get frineds list and save in database", async (done) => {
      try {
          let friends = await facebookHelper.getFriends();
          console.log("friends",friends);
@@ -47,7 +47,7 @@ describe('facebook-helper', () => {
           'email',
           'facebookId',
           'createdAt',
-          'updatedAt',
+          'updatedAt'
       );
       done();
     } catch (e) {
@@ -83,7 +83,7 @@ describe('facebook-helper', () => {
     try {
         let friends = await models.friends.findOne({
             where : {
-                email = 'hellojs@trunk.studio'
+                email:  'hellojs@trunk.studio'
             }
         });
         (result != null ).should.be.true;

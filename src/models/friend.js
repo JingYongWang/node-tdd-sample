@@ -5,7 +5,6 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     facebookId: DataTypes.STRING,
     email: DataTypes.STRING,
-    age: DataTypes.INTEGAR,
   }, {
     classMethods: {
       associate: (models) => {
