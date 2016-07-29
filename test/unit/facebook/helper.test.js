@@ -11,13 +11,13 @@ describe('facebook-helper', () => {
   before( async (done) => {
     //自己的ID和Token
     let userId = "648070781944220";
-    let token = "EAACEdEose0cBAAHM0D60lAxniq1TezCGFI6g9tjX9gxMvovChX9LvUqlcu710EBfLt6ZAtDLQqcyHZBzpKKDFKgbKiQC34wzgEVKdsXnH30MuWSWahFACfIIcrOin0NY8D6RK5yyZCqpRPspYwUlh3uauPQYEYZCE5ECXWtyKdy5PMZC38pI1";
+    let token = "EAACEdEose0cBAKK2CLQQCuRPmTNQcwZCXDnsZAfGZAY6K8KaRXFMyuoNnDhahoCmo4cYVBTVzfQkKbKU56DCwBbuZAD4Tef62vR1myWBrPptaSliIUnv4f9pZCJsKWSSwmJ0sZAkOuPdGxnLKmXfNOC5zOgLpJunvayjzW2lriUwZDZD";
     facebookHelper = new FacebookHelper({userId, token});
     models = await task1_initModel();
     console.log(facebookHelper);
     done();
   });
-  //把從 facebook 取得的 friends list 存入 sequelize 之 friend model (create)
+  //Item1:把從 facebook 取得的 friends list 存入 sequelize 之 friend model (create)
   it("get frineds list and save in database", async (done) => {
      try {
          let friends = await facebookHelper.getFriends();
@@ -39,8 +39,8 @@ describe('facebook-helper', () => {
      }
   });
 
-  //原本用 api 取得 friends list 改為透過查詢資料庫的方式 (find)
-  it("get friends list database", async (done) => {
+  //Item2:原本用 api 取得 friends list 改為透過查詢資料庫的方式 (find)
+  it.only("get friends list database", async (done) => {
     try {
       let friends = await models.friend.findAll();
       friends.should.be.Array;
@@ -53,6 +53,7 @@ describe('facebook-helper', () => {
           'updatedAt'
       );
       done();
+
     } catch (e) {
       done(e);
     }
